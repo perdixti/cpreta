@@ -1,0 +1,13 @@
+{
+  "monitor_enabled": true,
+  "observation_mode": "app",
+  "idle_minutes": 3,
+  "change_seconds": 30,
+  "cooldown_minutes": 5,
+  "checkin_minutes": 20,
+  "snooze_minutes": 5,
+  "max_prompts_hour": 6,
+  "device_name": "Meu dispositivo",
+  "reports_directory": "relatorios",
+  "auto_start": false
+}

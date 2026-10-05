@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block title %}Relatório salvo{% endblock %}{% block content %}
+<a class="back" href="{{ url_for('relatorios', files='1', _anchor='arquivos') }}">← Voltar aos relatórios</a>
+<div class="page-heading"><div><div class="eyebrow">RELATÓRIO SALVO</div><h1 class="report-title">{{ name }}</h1><p class="intro">Cópia do momento em que você registrou o relatório.</p></div><a class="button secondary" href="{{ url_for('download_report', name=name) }}">Baixar HTML ↓</a></div>
+<p class="report-delete-action"><a class="danger-link" href="{{ url_for('delete_report', name=name) }}">Excluir este HTML</a></p>
+<iframe class="saved-report-frame" sandbox title="Conteúdo do relatório salvo" src="{{ url_for('report_content', name=name) }}"></iframe>
+{% endblock %}

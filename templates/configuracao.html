@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Configuração{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">DO SEU JEITO</div><h1>Seu ambiente, seu ritmo.</h1><p class="intro">Ajuste como o CPreta acompanha o seu dia.</p></div><span class="outline-tag">CONFIGURAÇÃO</span></div>
+<form method="post" id="settings-form">
+<input type="hidden" name="csrf" value="{{ session.csrf }}">
+<div class="settings-layout"><div class="settings-main">
+<section class="card settings-card"><div class="section-heading"><span class="section-number">01</span><div><h2>Seu dispositivo</h2><p>Uma identidade e um lugar para seus arquivos.</p></div></div>
+<div class="fields"><label for="device_name">Nome do dispositivo</label><input id="device_name" name="device_name" value="{{ config.device_name }}" required maxlength="100" autocomplete="off">
+<label for="reports_directory">Pasta de relatórios</label><input id="reports_directory" name="reports_directory" value="{{ config.reports_directory }}" required maxlength="4096" spellcheck="false"><p class="hint">Um caminho absoluto ou relativo a <code>data</code>. A pasta será criada ao salvar.</p>
+<div class="toggle-row"><div><label for="auto_start">Iniciar com o sistema</label><p class="hint">Abra o CPreta automaticamente ao entrar no Windows, sem terminal nem navegador.</p></div><label class="switch"><input id="auto_start" type="checkbox" name="auto_start" {% if config.auto_start %}checked{% endif %}><span></span></label></div>
+<div class="prepared"><span>{{ 'ATIVADO NO WINDOWS' if autostart_status and autostart_status.enabled else 'INICIALIZAÇÃO AUTOMÁTICA' }}</span>{{ autostart_status.message if autostart_status else 'Salve as configurações após reiniciar a aplicação para registrar no Windows.' }}<br>Para desativar, desmarque a opção e salve. A aplicação continua funcionando até você encerrá-la.</div></div></section>
+<section class="card settings-card"><div class="section-heading"><span class="section-number">02</span><div><h2>Presença do assistente</h2><p>Perguntas breves, em momentos que fazem sentido.</p></div></div><div class="fields">{% include 'monitor_settings.html' %}</div></section>
+<div class="save-bar"><span id="save-hint">Tudo pronto para ajustar suas preferências.</span><button type="submit">Salvar configurações <span>→</span></button></div>
+</div><aside class="settings-aside"><div class="aside-symbol">◎</div><h2>Você dá o contexto.</h2><p>O aplicativo em foco é apenas um sinal temporário. O histórico guarda suas descrições, seus resultados e seu tempo.</p><ul><li>Sem capturas de tela</li><li>Sem registro de teclas</li><li>Sem títulos de janelas ou URLs</li><li>Sem envio para servidores externos</li></ul><div class="aside-status"><strong>Situação do assistente</strong><p>{{ runtime.description }}</p>{% if runtime.error %}<p class="error-text">{{ runtime.error }}</p>{% endif %}</div><button class="text-button shutdown-button" type="button">Encerrar o CPreta</button><p class="hint">Encerra a atividade atual e fecha o processo local.</p></aside></div></form>
+{% endblock %}

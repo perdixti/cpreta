@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block title %}Confirmar exclusão{% endblock %}{% block content %}
+<a class="back" href="{{ back }}">← Cancelar e voltar</a>
+<section class="card deletion-card">
+<div class="eyebrow">REVISAR ANTES DE EXCLUIR</div><h1>Excluir este item?</h1>
+<p class="deletion-target">{{ title }}</p>
+<p>{{ explanation }}</p>
+<p class="deletion-warning">Esta exclusão é permanente e não pode ser desfeita pelo CPreta.</p>
+<form method="post"><input type="hidden" name="csrf" value="{{ session.csrf }}"><input type="hidden" name="fingerprint" value="{{ fingerprint }}"><input type="hidden" name="confirm" value="delete">
+<div class="deletion-actions"><a class="button secondary" href="{{ back }}">Cancelar</a><button type="submit" class="danger-button">Excluir permanentemente</button></div>
+</form></section>
+{% endblock %}
